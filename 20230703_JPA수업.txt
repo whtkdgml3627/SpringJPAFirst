@@ -1,4 +1,4 @@
-0703 수업메모 - JPA
+0703 수업메모 - JPA, React
 
 spring.jpa.hibernate.ddl-auto=update
 
@@ -13,6 +13,54 @@ Entity는 각자 자신의 식별자가 있다 (PK)
 Entity 클래스와 Entity인스턴스는 다름
 Entity 클래스에서 만들어주는 객체를 Entity인스턴스(객체)라 부름
 
+Controller와 Service에서는 항상 DTO만 주고 받는다 Entity는 몰라도 됨
+
+---------------개발순서---------------
+서버 개발 -> POSTMAN으로 확인 -> 리액트 개발
+
 JPA
 dirty read
 https://devocean.sk.com/blog/techBoardDetail.do?ID=163799
+
+면접 질문 예상 범위
+스프링, 리액트 면접 문제부터 정리 그 후에 DB, JAVA 로 주제 넓히기
+
+CORS
+ajax통신할 때 반드시 발생하는 문제 (get방식도 적용됨)
+도메인이 다를경우 전달은 되나 server쪽에서 넘어올 때 막음
+자신의 사이트가 아니라면 ajax는 원래 접근이 안됨
+브라우저에선 접근이 되지만 ajax비동기 통신은 접속이 안됨 (동일출처정책)
+
+preflight -> 호출해되 되는지 한번 더 확인하는 type?
+
+해결방법 3가지
+1. 쉬운방법
+  - 어노테이션 한줄로 처리 가능
+  - @CrossOrigin
+
+2. Configuration 새로 잡는 방법
+3. Seceurity할 때 사용방법
+
+
+리액트쿼리, 리코일
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
