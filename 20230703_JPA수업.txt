@@ -1,0 +1,18 @@
+0703 수업메모 - JPA
+
+spring.jpa.hibernate.ddl-auto=update
+
+spring.jpa.properties.hibernate.format_sql=true
+
+spring.jpa.show-sql=true
+org.hibernate.SQL=debug
+
+하나의 도메인은 여러개의 Entity로 구성될 수 있다
+Entity는 각자 자신의 식별자가 있다 (PK)
+
+Entity 클래스와 Entity인스턴스는 다름
+Entity 클래스에서 만들어주는 객체를 Entity인스턴스(객체)라 부름
+
+JPA
+dirty read
+https://devocean.sk.com/blog/techBoardDetail.do?ID=163799
