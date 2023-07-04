@@ -1,0 +1,7 @@
+0704 수업메모 - JPA, React
+
+도메인 -> 여러개의 Entity를 가짐
+
+BaseEntity -> 추상클래스
+
+@MappedSuperclass -> 테이블로 만들어지지 않게 설정해주는 어노테이션
