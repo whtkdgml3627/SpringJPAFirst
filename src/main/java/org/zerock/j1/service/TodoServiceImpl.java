@@ -1,6 +1,7 @@
 package org.zerock.j1.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -15,9 +16,7 @@ import org.zerock.j1.dto.TodoDTO;
 import org.zerock.j1.repository.TodoRepository;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @Service
 @RequiredArgsConstructor
 public class TodoServiceImpl implements TodoService {
@@ -53,6 +52,39 @@ public class TodoServiceImpl implements TodoService {
     Todo result = todoRepository.save(entity);
 
     return modelMapper.map(result, TodoDTO.class);
+  }
+
+  //Optional 어떻게 쓰는지, 작동기능이 뭔지 공부
+  @Override
+  public TodoDTO getOne(Long tno) {
+
+    Optional<Todo> result = todoRepository.findById(tno);
+
+    //예외를 던져주는 방식
+    Todo todo = result.orElseThrow();
+
+    //dto 타입으로 변환
+    TodoDTO dto = modelMapper.map(todo, TodoDTO.class);
+
+    return dto;
+  }
+
+  @Override
+  public void remove(Long tno) {
+
+    todoRepository.deleteById(tno);
+  }
+
+  @Override
+  public void modify(TodoDTO dto) {
+    //가져오고
+    Optional<Todo> result = todoRepository.findById(dto.getTno());
+    //예외던져주고
+    Todo todo = result.orElseThrow();
+    //타이틀바꿔주고
+    todo.changeTitle(dto.getTitle());
+    //그다음 저장
+    todoRepository.save(todo);
   }
   
 }

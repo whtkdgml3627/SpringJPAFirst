@@ -1,5 +1,6 @@
 package org.zerock.j1.repository;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,8 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Commit;
 import org.zerock.j1.domain.Board;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 
 @SpringBootTest
@@ -73,6 +76,7 @@ public class BoardRepositoryTests {
     boardRepository.save(board);
   }
 
+  //쿼리 테스트 조회
   @Test
   public void testQuery1(){
 
@@ -82,7 +86,42 @@ public class BoardRepositoryTests {
     log.info(list.size());
     log.info(list);
   }
+  
+  //@Query 쿼리 테스트 조회
+  @Test
+  public void testQuery1_1(){
 
+    List<Board> list = boardRepository.listTitle("1");
+
+    log.info("--------------------------------------------------------------------------");
+    log.info(list.size());
+    log.info(list);
+  }
+  
+  //@Query 쿼리 테스트 조회
+  @Test
+  public void testQuery1_2(){
+
+    List<Object[]> list = boardRepository.listTitle2("1");
+
+    log.info("--------------------------------------------------------------------------");
+    log.info(list.size());
+    list.forEach(arr -> log.info(Arrays.toString(arr)));
+  }
+  
+  //@Query 쿼리 테스트 페이징처리까지 조회
+  @Test
+  public void testQuery1_3(){
+
+    Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+
+    Page<Object[]> result = boardRepository.listTitle2("1", pageable);
+
+    log.info("--------------------------------------------------------------------------");
+    log.info(result);
+  }
+
+  //쿼리 테스트 페이징처리까지 조회
   @Test
   public void testQuery2(){
 
@@ -92,6 +131,43 @@ public class BoardRepositoryTests {
     
     log.info("--------------------------------------------------------------------------");
     log.info(result);
+  }
+
+  //@Query 쿼리 테스트 수정처리
+  //modify는 Transactional 필수
+  //test에서 진행하면 Default가 rollback
+  @Commit
+  @Transactional
+  @Test
+  public void testModify(){
+
+    Long bno = 100L;
+    String title = "Modified Title 100";
+
+    int count = boardRepository.modifyTitle(title, bno);
+
+    log.info("----------------------------------------------" + count);
+  }
+
+  //@Query -> NativeQuery (SQL문으로 작성해서 사용)
+  @Test
+  public void testNative(){
+
+    List<Object[]> result = boardRepository.listNative();
+    result.forEach(arr -> log.info(Arrays.toString(arr)));
+  }
+
+  //
+  @Test
+  public void testSearch1(){
+
+    Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+
+    Page<Board> result = boardRepository.search1(null, "1", pageable);
+
+    log.info(result.getTotalElements());
+
+    result.get().forEach(b -> log.info(b));
   }
 
 }

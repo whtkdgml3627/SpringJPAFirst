@@ -12,4 +12,10 @@ public interface TodoService {
 
   TodoDTO register(TodoDTO dto);
 
+  TodoDTO getOne(Long tno);
+
+  void remove(Long tno);
+
+  void modify(TodoDTO dto);
+
 }
