@@ -17,4 +17,7 @@ public interface BoardSearch {
   //간단한 list
   Page<Board> search1(String searchType, String keyword, Pageable pageable);
 
+  //댓글까지 포함된 list
+  Page<Object[]> searchWithRcnt(String searchType, String keyword, Pageable pageable);
+
 }

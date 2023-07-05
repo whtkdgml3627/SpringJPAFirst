@@ -170,4 +170,26 @@ public class BoardRepositoryTests {
     result.get().forEach(b -> log.info(b));
   }
 
+  //@Query -> 댓글 개수를 포함한 List
+  @Test
+  public void testListWithRcnt(){
+
+    List<Object[]> result = boardRepository.getListWithRcount();
+
+    for (Object[] result2 : result) {
+      log.info(Arrays.toString(result2));
+    }
+
+  }
+
+  //Querydsl 로 댓글 카운트 있는 검색되는 list
+  @Test
+  public void testListWithRcntSearch(){
+
+    Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+
+    boardRepository.searchWithRcnt("tcw", "1", pageable);
+
+  }
+
 }
