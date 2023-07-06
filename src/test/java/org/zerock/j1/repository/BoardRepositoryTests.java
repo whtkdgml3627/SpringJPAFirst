@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.zerock.j1.domain.Board;
+import org.zerock.j1.dto.PageRequestDTO;
 
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
@@ -189,6 +190,16 @@ public class BoardRepositoryTests {
     Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
 
     boardRepository.searchWithRcnt("tcw", "1", pageable);
+
+  }
+
+  //paging Querydsl로 댓글 카운트 있는 list DTO버전
+  @Test
+  public void test0706_1(){
+
+    PageRequestDTO pageRequest = new PageRequestDTO();
+
+    boardRepository.searchDTORcnt(pageRequest);
 
   }
 
