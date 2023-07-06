@@ -191,6 +191,9 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
       query.where(searchBuilder);
     }
 
+    //paging
+    this.getQuerydsl().applyPagination(pageable, query);
+
     //group by 선언 하고 where줘도 지가 알아서 찾아서 where문 실행해줌
     //board 별로 group by 해줌
     query.groupBy(board);
@@ -210,7 +213,12 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
     log.info("----------------------------------------------------------------");
     log.info(list);
 
-    return null;
+    //total 가져오기
+    long totalCount = listQuery.fetchCount();
+
+    log.info(totalCount);
+
+    return new PageResponseDTO<>(list, totalCount, requestDTO);
   }
 
 }
