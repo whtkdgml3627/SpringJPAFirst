@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.zerock.j1.domain.Board;
 import org.zerock.j1.dto.BoardListRcntDTO;
+import org.zerock.j1.dto.BoardReadDTO;
 import org.zerock.j1.dto.PageRequestDTO;
 import org.zerock.j1.dto.PageResponseDTO;
 
@@ -205,6 +206,21 @@ public class BoardRepositoryTests {
 
     log.info(responseDTO);
 
+  }
+
+  @Test
+  public void testReadOne(){
+
+    Long bno = 77L;
+
+    BoardReadDTO dto = boardRepository.readOne(bno);
+
+    //$Proxy 일 때 $가 있으면 입력 클래스임
+    log.info("---------------------------------------------------------------------");
+    log.info(dto);
+    log.info(dto.getClass());
+    log.info(dto.getRegDate());
+    log.info(dto.getModDate());
   }
 
 }
