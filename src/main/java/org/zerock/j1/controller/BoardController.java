@@ -1,5 +1,6 @@
 package org.zerock.j1.controller;
 
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +27,7 @@ public class BoardController {
   //consumes 데이터타입 소비
   // @GetMapping(value = "/list", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   @GetMapping(value = "/list")
-  public PageResponseDTO<BoardListRcntDTO> list(PageRequestDTO requestDTO){
+  public PageResponseDTO<BoardListRcntDTO> list(@ParameterObject PageRequestDTO requestDTO){
 
     log.info(requestDTO);
 
