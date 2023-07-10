@@ -42,6 +42,8 @@ public class ReplyServiceImpl implements ReplyService {
 
       //55/50 = 1.1 그럼 2페이지
       pageNum = (int) (Math.ceil(totalCount/(double)requestDTO.getSize()));
+
+      pageNum = pageNum <= 0 ? 1 : pageNum;
     }
 
     //페이징처리 of의 첫번째 페이지 불러오는 값은 0부터 시작이니 -1 해줌

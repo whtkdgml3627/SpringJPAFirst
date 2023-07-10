@@ -19,7 +19,7 @@ public class ReplyPageRequestDTO extends PageRequestDTO {
   private int page = 1;
 
   @Builder.Default
-  private int size = 50;
+  private int size = 20;
 
   private boolean last;
 
