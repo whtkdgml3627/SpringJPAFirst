@@ -35,3 +35,5 @@ select
         b1_0.title,
         b1_0.writer 
 ;
+select * from t_reply order by rno desc;
+delete from t_reply where rno = 278;

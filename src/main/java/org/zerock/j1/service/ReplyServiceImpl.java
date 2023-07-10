@@ -92,5 +92,33 @@ public class ReplyServiceImpl implements ReplyService {
 
     return modelMapper.map(reply, ReplyDTO.class);
   }
+
+  @Override
+  public void remove(Long rno) {
+    
+    Optional<Reply> result = replyRepository.findById(rno);
+
+    Reply reply = result.orElseThrow();
+
+    reply.changeText("해당 글은 삭제되었습니다.");
+    reply.changeFile(null);
+
+    replyRepository.save(reply);
+    
+  }
+
+  @Override
+  public void modify(ReplyDTO replyDTO) {
+
+    Optional<Reply> result = replyRepository.findById(replyDTO.getRno());
+
+    Reply reply = result.orElseThrow();
+
+    reply.changeText(replyDTO.getReplyText());
+    reply.changeFile(replyDTO.getReplyFile());
+
+    replyRepository.save(reply);
+
+  }
   
 }
