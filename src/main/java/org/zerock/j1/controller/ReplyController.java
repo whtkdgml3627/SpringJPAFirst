@@ -1,8 +1,12 @@
 package org.zerock.j1.controller;
 
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.zerock.j1.dto.PageResponseDTO;
@@ -30,6 +34,18 @@ public class ReplyController {
     log.info(requestDTO);
 
     return replyService.list(requestDTO);
+  }
+
+  @PostMapping("/")
+  public Map<String, Long> register(
+    @RequestBody ReplyDTO replyDTO
+  ){
+    log.info("ReplyController...............................");
+    log.info(replyDTO);
+
+    Long newRno = replyService.register(replyDTO);
+
+    return Map.of("result", newRno);
   }
   
 }

@@ -68,5 +68,18 @@ public class ReplyServiceImpl implements ReplyService {
     responseDTO.setPage(pageNum);
     return responseDTO;
   }
+
+  @Override
+  public Long register(ReplyDTO replyDTO) {
+
+    Reply reply = modelMapper.map(replyDTO, Reply.class);
+
+    log.info("reply.......");
+    log.info(reply);
+
+    long newRno = replyRepository.save(reply).getRno();
+
+    return newRno;
+  }
   
 }

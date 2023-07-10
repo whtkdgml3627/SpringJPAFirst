@@ -11,4 +11,6 @@ public interface ReplyService {
   
   PageResponseDTO<ReplyDTO> list(ReplyPageRequestDTO requestDTO);
 
+  Long register(ReplyDTO replyDTO);
+
 }
