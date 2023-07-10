@@ -1,6 +1,7 @@
 package org.zerock.j1.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -80,6 +81,16 @@ public class ReplyServiceImpl implements ReplyService {
     long newRno = replyRepository.save(reply).getRno();
 
     return newRno;
+  }
+
+  @Override
+  public ReplyDTO read(Long rno) {
+
+    Optional<Reply> result = replyRepository.findById(rno);
+
+    Reply reply = result.orElseThrow();
+
+    return modelMapper.map(reply, ReplyDTO.class);
   }
   
 }

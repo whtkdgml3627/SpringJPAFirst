@@ -26,6 +26,7 @@ public class ReplyController {
 
   private final ReplyService replyService;
 
+  //list
   @GetMapping("/{bno}/list")
   public PageResponseDTO<ReplyDTO> list(
     @PathVariable("bno") Long bno, ReplyPageRequestDTO requestDTO
@@ -36,6 +37,7 @@ public class ReplyController {
     return replyService.list(requestDTO);
   }
 
+  //register
   @PostMapping("/")
   public Map<String, Long> register(
     @RequestBody ReplyDTO replyDTO
@@ -46,6 +48,15 @@ public class ReplyController {
     Long newRno = replyService.register(replyDTO);
 
     return Map.of("result", newRno);
+  }
+
+  //read
+  @GetMapping("/{rno}")
+  public ReplyDTO get(
+    @PathVariable("rno") Long rno
+  ){
+    //바로조회
+    return replyService.read(rno);
   }
   
 }
